@@ -1,0 +1,1602 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>kyoungmin Son</title>
+    <style>
+        
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #3b82f6;
+            --text-color: #1e293b;
+            --light-bg: #f8fafc;
+            --dark-bg: #1e293b;
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, 
+                Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-color: #ffffff;
+        }
+        
+        /* 다크모드 토글 */
+        body.dark-mode {
+            background-color: var(--dark-bg);
+            color: #e2e8f0;
+        }
+        
+        body.dark-mode .navbar, 
+        body.dark-mode footer {
+            background-color: #0f172a;
+        }
+        
+        body.dark-mode .card {
+            background-color: #334155;
+            color: #e2e8f0;
+        }
+        
+        body.dark-mode .section-title {
+            color: #f1f5f9;
+        }
+        
+        body.dark-mode .navbar-links a,
+        body.dark-mode .social-links a {
+            color: #e2e8f0;
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+            transition: var(--transition);
+        }
+        
+        a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 40px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-color);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        
+        /* 내비게이션 바 */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+        
+        .navbar-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .navbar-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .navbar-links a {
+            color: var(--text-color);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .navbar-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .theme-toggle, .menu-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--text-color);
+            transition: var(--transition);
+        }
+        
+        .theme-toggle:hover, .menu-toggle:hover {
+            color: var(--primary-color);
+        }
+        
+        .menu-toggle {
+            display: none;
+        }
+        
+        /* 헤더/히어로 섹션 */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.05) 0%, rgba(59, 130, 246, 0.1) 100%);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .hero-content {
+            max-width: 700px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: #475569;
+        }
+        
+        body.dark-mode .hero-subtitle {
+            color: #cbd5e1;
+        }
+        
+        .hero-btns {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: var(--transition);
+            cursor: pointer;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+            border: 2px solid var(--primary-color);
+        }
+        
+        .btn-primary:hover {
+            background-color: #1d4ed8;
+            border-color: #1d4ed8;
+            color: white;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .hero-image {
+            position: absolute;
+            right: 11%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 280px;
+            height: 365px;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            z-index: 1;
+            border: 8px solid rgba(255, 255, 255, 0.8);
+        }
+        
+        .hero-image img {
+            width: 100%;
+         height: 100%;
+    object-fit: contain;
+    object-position: center;
+    margin: auto;
+    display: block;
+        }
+        
+        .hero-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+        
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.4;
+        }
+        
+        .shape-1 {
+            width: 300px;
+            height: 300px;
+            background-color: var(--primary-color);
+            right: -100px;
+            top: -100px;
+            animation: float 10s ease-in-out infinite;
+        }
+        
+        .shape-2 {
+            width: 200px;
+            height: 200px;
+            background-color: var(--secondary-color);
+            left: -50px;
+            bottom: -50px;
+            animation: float 12s ease-in-out infinite reverse;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translate(0, 0);
+            }
+            50% {
+                transform: translate(30px, 30px);
+            }
+            100% {
+                transform: translate(0, 0);
+            }
+        }
+        
+        /* 소개 섹션 */
+        .about-container {
+            display: flex;
+            gap: 50px;
+            align-items: center;
+        }
+        
+        .about-image {
+            flex: 1;
+            max-width: 400px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        .about-content {
+            flex: 1;
+        }
+        
+        .about-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .about-title::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            background-color: var(--primary-color);
+            bottom: -5px;
+            left: 0;
+        }
+        
+        .about-text {
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .skill-tag {
+            background-color: rgba(37, 99, 235, 0.1);
+            color: var(--primary-color);
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        body.dark-mode .skill-tag {
+            background-color: rgba(37, 99, 235, 0.2);
+        }
+        
+        .skill-tag:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        /* 프로젝트 섹션 */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .project-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .project-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .project-card:hover .project-image img {
+            transform: scale(1.1);
+        }
+        
+        .project-content {
+            padding: 20px;
+        }
+        
+        .project-title {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .project-description {
+            margin-bottom: 15px;
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+        
+        body.dark-mode .project-description {
+            color: #cbd5e1;
+        }
+        
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .project-tech span {
+            font-size: 0.8rem;
+            background-color: #f1f5f9;
+            color: #475569;
+            padding: 4px 8px;
+            border-radius: 3px;
+        }
+        
+        body.dark-mode .project-tech span {
+            background-color: #1e293b;
+            color: #cbd5e1;
+        }
+        
+        .project-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .project-links a {
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .project-links i {
+            font-size: 1rem;
+        }
+        
+        /* 모달 */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            background-color: white;
+            width: 90%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+            border-radius: 10px;
+            position: relative;
+            animation: modalFadeIn 0.4s forwards;
+        }
+        
+        body.dark-mode .modal-content {
+            background-color: #0f172a;
+        }
+        
+        @keyframes modalFadeIn {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .modal-header {
+            position: relative;
+            height: 300px;
+            overflow: hidden;
+        }
+        
+        .modal-header img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: rgba(255, 255, 255, 0.8);
+            color: black;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 10;
+        }
+        
+        .modal-close:hover {
+            background-color: white;
+            transform: rotate(90deg);
+        }
+        
+        .modal-body {
+            padding: 30px;
+        }
+        
+        .modal-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        
+        .modal-description {
+            margin-bottom: 25px;
+            line-height: 1.8;
+        }
+        
+        .modal-tech-stack {
+            margin-bottom: 25px;
+        }
+        
+        .modal-tech-stack h3 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .modal-tech-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .modal-tech-list span {
+            background-color: #f1f5f9;
+            color: #475569;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+        
+        body.dark-mode .modal-tech-list span {
+            background-color: #1e293b;
+            color: #cbd5e1;
+        }
+        
+        .modal-gallery {
+            margin-bottom: 25px;
+        }
+        
+        .modal-gallery h3 {
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        
+        .gallery-item {
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .modal-links {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .modal-links a {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+        }
+        
+        /* 연락처 섹션 */
+        .contact {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.05) 0%, rgba(59, 130, 246, 0.1) 100%);
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+        
+        body.dark-mode .contact-icon {
+            background-color: #334155;
+        }
+        
+        .contact-details h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        
+        .contact-details p, .contact-details a {
+            color: #64748b;
+        }
+        
+        body.dark-mode .contact-details p, 
+        body.dark-mode .contact-details a {
+            color: #cbd5e1;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            color: var(--text-color);
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+        
+        body.dark-mode .social-links a {
+            background-color: #334155;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-5px);
+        }
+        
+        .contact-form {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        body.dark-mode .contact-form {
+            background-color: #334155;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            background-color: #f8fafc;
+            color: var(--text-color);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        body.dark-mode .form-control {
+            background-color: #1e293b;
+            border-color: #475569;
+            color: #f8fafc;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+        }
+        
+        textarea.form-control {
+            resize: vertical;
+            min-height: 150px;
+        }
+        
+        .submit-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-block;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .submit-btn:hover {
+            background-color: #1d4ed8;
+        }
+        
+        /* 푸터 */
+        footer {
+            background-color: #f8fafc;
+            padding: 50px 0 20px;
+            text-align: center;
+        }
+        
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-links a {
+            color: var(--text-color);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .footer-socials {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-socials a {
+            width: 40px;
+            height: 40px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            color: var(--text-color);
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+        
+        body.dark-mode .footer-socials a {
+            background-color: #334155;
+        }
+        
+        .footer-socials a:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+        
+        body.dark-mode .copyright {
+            color: #cbd5e1;
+        }
+        
+        /* 반응형 디자인 */
+        @media (max-width: 1100px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+            
+            .hero-image {
+                width: 350px;
+                height: 350px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .section {
+                padding: 60px 0;
+            }
+            
+            .hero-content {
+                text-align: center;
+                margin: 0 auto;
+            }
+            
+            .hero-btns {
+                justify-content: center;
+            }
+            
+            .hero-image {
+                position: relative;
+                top: auto;
+                right: auto;
+                transform: none;
+                margin: 40px auto 0;
+                width: 300px;
+                height: 300px;
+            }
+            
+            .about-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .about-image {
+                margin: 0 auto 40px;
+            }
+            
+            .about-title::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            .skills {
+                justify-content: center;
+            }
+            
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-info {
+                order: 2;
+            }
+            
+            .contact-form {
+                order: 1;
+                margin-bottom: 40px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .navbar-links, .theme-toggle {
+                display: none;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            .navbar-links.active {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                padding: 20px;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            }
+            
+            body.dark-mode .navbar-links.active {
+                background-color: #0f172a;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+     <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script type="text/javascript">
+      (function(){
+        emailjs.init("RyMHPA1RdN6HBBX0k"); 
+      })();
+    </script>
+</head>
+<body>
+    <!-- 내비게이션 바 -->
+    <nav class="navbar">
+        <div class="container navbar-container">
+            <a href="#" class="logo">KYOUNGMIN SON</a>
+            <div class="navbar-links">
+                <a href="#about">소개</a>
+                <a href="#projects">프로젝트</a>
+                <a href="#contact">연락처</a>
+            </div>
+            <div class="nav-buttons">
+                <button class="theme-toggle" id="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="menu-toggle" id="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 헤더/히어로 섹션 -->
+    <header class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">A passionate<br><span style="color: var(--primary-color)">developer</span> growing with AI</h1>
+                <p class="hero-subtitle">트렌드를 놓치지 않는 시야와 협업 능력으로 더 나은 솔루션을 만듭니다.</p>
+                <div class="hero-btns">
+                    <a href="#projects" class="btn btn-primary">프로젝트 보기</a>
+                    <a href="#contact" class="btn btn-outline">연락하기</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="Images/face.jpeg" alt="프로필 이미지">
+            </div>
+        </div>
+        <div class="hero-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+        </div>
+    </header>
+
+    <!-- 소개 섹션 -->
+    <section class="section about" id="about">
+        <div class="container">
+            <h2 class="section-title">소개</h2>
+            <div class="about-container">
+                <div class="about-image">
+                    <img src="Images/IMG4.jpg" alt="프로필 이미지">
+                </div>
+                <div class="about-content">
+                    <h3 class="about-title">저는 누구인가요?</h3>
+                    <p class="about-text">
+                       안녕하세요! 저는 웹과 모바일 애플리케이션 개발을 기반으로 실력을 쌓아온 학생입니다. 다양한 프로젝트를 통해 사용자 중심의 효율적인 솔루션을 구현하는 데 주력해왔으며, 새로운 기술과 트렌드에 대한 호기심으로 꾸준히 성장해왔습니다.
+                       1학년 때는 생명과학 전공 수업을 위주로 학습하면서 생명에 대한 깊은 관심과 학문적 기초를 다졌습니다. 이 경험은 단순한 개발을 넘어, 인간의 건강과 삶의 질 향상에 기여하는 방향으로 프로젝트를 설계하고 실행하는 데 큰 자산이 되었습니다.
+                    </p>
+                    <p class="about-text">
+                        사실 처음 코딩 언어를 배우고 개발을 시작하던 시기에는, 웹을 통해 원하는 것을 만들 수 있다는 흥미에 빠져 다양한 프로젝트를 시도하는 데 열중하느라 학업에 집중하지 못한 시기가 있었습니다. 하지만 이 시기를 통해 직접 몸으로 부딪히며 다양한 실전 경험을 쌓을 수 있었고,
+                         오히려 저에게 매우 소중한 배움의 시간이었습니다. 예를 들어, 아르바이트하던 논술 학원의 웹사이트(프론트엔드)를 외주로 개발하거나, 제가 다니는 교회의 웹 서버를 열어 코드를 직접 수정해보는 등 실제 사용자를 위한 개발 경험을 하며 기술의 실질적 쓰임과 가치를 체감할 수 있었습니다. 이처럼 학교를 다니는 동안에는 수업 외적으로도 필요한 기술들을 스스로 익히기 위해 꾸준히 노력해왔습니다.
+                        
+                    </p>
+                    <p class="about-text">
+                        최근에는 인공지능과 바이오헬스케어 분야에 깊은 흥미를 갖게 되었고, AI 기술을 웹과 앱 개발에 접목하여 헬스케어 서비스의 가치를 높이기 위한 시도를 이어오고 있습니다. 사용자 건강 데이터를 분석하거나, 맞춤형 피드백을 제공하는 기능들을 구현해보며 기술과 생명과학의 융합 가능성을 탐색해왔습니다.
+                    </p>
+                    <p class="about-text">
+                        앞으로는 이 분야의 전문성과 실질적인 기여를 목표로 본격적인 학업과 연구를 이어가고 싶습니다. 배우고 싶은 것도, 배워야 할 것도 많지만, 꾸준한 노력과 열정으로 한 단계씩 성장하며 문제 해결 역량을 키워나가는 것에 자신이 있습니다.
+                    </p>
+                    <div class="skills">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Java</span>
+                        <span class="skill-tag">HTML</HTML></HTML></span>
+                        <span class="skill-tag">CSS</span>
+                        <span class="skill-tag">JS</span>
+                        <span class="skill-tag">Spring boot JPA</span>
+                        <span class="skill-tag">MySQL</span>
+                        <span class="skill-tag">Kotlin</span>
+                        <span class="skill-tag">Flutter</span>
+                        <span class="skill-tag">Git</span>
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 프로젝트 섹션 -->
+    <section class="section projects" id="projects">
+        <div class="container">
+            <h2 class="section-title">프로젝트</h2>
+            <div class="projects-grid">
+                <!-- 프로젝트 1 -->
+                <div class="project-card" data-id="1">
+                    <div class="project-image">
+                        <img src="Images/herbway.jpg" alt="프로젝트 1">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">헬스케어 AI, 약용식물 예측 플랫폼</h3>
+                        <p class="project-description">
+                            식물의 개화 및 수확 시기 예측을 통해 약용 식물에 대한 건강 관련 정보를 매핑하고 제공하는 플랫폼입니다. 
+                        </p>
+                        <div class="project-tech">
+                            <span>Spring JPA</span>
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>MySQL</span>
+                            <span>Python</span>
+                        </div><br><br>
+                        <div class="project-links">
+                            <a href="#"><i class="fab fa-github"></i> 깃허브</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 프로젝트 2 -->
+                <div class="project-card" data-id="2">
+                    <div class="project-image">
+                        <img src="Images/NextPro.jpg" alt="프로젝트 2">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">유소년 선수 양성 플랫폼</h3>
+                        <p class="project-description">
+                            유소년 선수들의 경기 영상 포트폴리오를 통해 구단이 쉽게 인재를 발굴할 수 있도록 지원하는 홍보 및 매칭 플랫폼입니다.
+                        </p>
+                        <div class="project-tech">
+                            <span>Spring JPA</span>
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>JS</span>
+                            <span>MySQL</span>
+                        </div><br>
+                        <div class="project-links">
+                            <a href="#"><i class="fab fa-github"></i> 깃허브</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 프로젝트 3 -->
+                <div class="project-card" data-id="3">
+                    <div class="project-image">
+                        <img src="Images/blog.jpg" alt="프로젝트 3">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">블로그 배포 작업</h3>
+                        <p class="project-description">
+                            Node.js와 AWS를 기반으로 배포 및 운영한 학교 커뮤니티 플랫폼입니다.
+                        </p>
+                        <div class="project-tech">
+                            <span>Node.js</span>
+                            <span>MySQL</span>
+                            <span>AWS EC2</span>
+                            <span>RDS</span>
+                            <span>S3</span>
+                            <span>Lambda</span>
+                            <span>IAM</span>
+                            <span>VPC</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/SONKM/CloudeComputing"><i class="fab fa-github"></i> 깃허브</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 프로젝트 4 -->
+                <div class="project-card" data-id="4">
+                    <div class="project-image">
+                        <img src="Images/healfit.jpg" alt="프로젝트 4">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">AI 맞춤형 영양 관리 앱</h3>
+                        <p class="project-description">
+                            공공데이터를 활용해 시각장애인에게 맞춤형 식단 정보와 음성 지원 기능을 제공하는 AI 기반 모바일 영양 관리 앱입니다.
+                        </p>
+                        <div class="project-tech">
+                            <span>Flutter</span>
+                            <span>Dart</span>
+                            <span>Provider</span>
+                            <span>Nutrition API</span>
+                            <span>Speech-to-Text</span>
+                     </div>
+                        <div class="project-links">
+                            <a href="https://github.com/SONKM/heal-fit"><i class="fab fa-github"></i> 깃허브</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 프로젝트 5 -->
+                <div class="project-card" data-id="5">
+                    <div class="project-image">
+                        <img src="Images/stock.jpg" alt="프로젝트 5">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">주식 예측 프로그램</h3>
+                        <p class="project-description">
+                            삼성전자, NAVER 등 주요 종목의 과거 데이터를 기반으로 향후 3일간의 종가를 예측하는 주가 분석 모델입니다.
+                        </p>
+                        <div class="project-tech">
+                           <span>Python</span>
+                           <span>Pandas</span>
+                           <span>NumPy</span>
+                           <span>FinanceDataReader</span>
+                           <span>Matplotlib</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/SONKM/stock-forecast"><i class="fab fa-github"></i> 깃허브</a>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- 프로젝트 모달 -->
+    <div class="modal" id="project-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <image src="/api/placeholder/900/300" alt="프로젝트 이미지">
+                <div class="modal-close" id="modal-close">
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+            <div class="modal-body">
+                <h2 class="modal-title">프로젝트 제목</h2>
+                <div class="modal-description">
+                    <p>상세한 프로젝트 설명이 여기에 들어갑니다. 프로젝트의 목적, 개발 과정, 도전과제와 해결방안 등을 설명합니다.</p>
+                    <p>이 프로젝트는 [목적]을 위해 개발되었으며, [주요 기능]을 제공합니다. 개발 과정에서 [도전과제]와 같은 문제에 직면했고, [해결방안]을 적용하여 해결했습니다.</p>
+                </div>
+                <div class="modal-tech-stack">
+                    <h3>기술 스택</h3>
+                    <div class="modal-tech-list">
+                        <span>JavaScript</span>
+                        <span>React</span>
+                        <span>Node.js</span>
+                        <span>MongoDB</span>
+                        <span>Docker</span>
+                    </div>
+                </div>
+                <div class="modal-gallery">
+                    <h3>프로젝트 갤러리</h3>
+                    <div class="gallery-grid">
+                        <div class="gallery-item">
+                            <img src="/api/placeholder/250/150" alt="프로젝트 스크린샷 1">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="/api/placeholder/250/150" alt="프로젝트 스크린샷 2">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="/api/placeholder/250/150" alt="프로젝트 스크린샷 3">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="/api/placeholder/250/150" alt="프로젝트 스크린샷 4">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-links">
+                    <a href="https://github.com/SONKM"><i class="github"></i> 깃허브 저장소</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 연락처 섹션 -->
+    <section class="section contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">연락처</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>이메일</h3>
+                            <a href="mailto:your.email@example.com">son010917@gmail.com</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>전화번호</h3>
+                            <p>+82 10-3492-3936</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>위치</h3>
+                            <p>서울특별시 강동구, 대한민국</p>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://github.com/SONKM"><i class="fab fa-github"></i></a>
+                        <a href="https://www.instagram.com/kmin.s17/"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+               <div class="contact-form">
+            <form id="contact-form">
+                <div class="form-group">
+                <label for="name" class="form-label">이름</label>
+                <input type="text" id="name" name="name" class="form-control" placeholder="이름을 입력하세요!" required>
+                </div>
+                <div class="form-group">
+                <label for="email" class="form-label">이메일</label>
+                <input type="email" id="email" name="email" class="form-control" placeholder="발신자 이메일을 입력하세요!" required>
+                </div>
+                <div class="form-group">
+                <label for="subject" class="form-label">제목</label>
+                <input type="text" id="subject" name="title" class="form-control" placeholder="제목을 입력하세요!" required>
+                </div>
+                <div class="form-group">
+                <label for="message" class="form-label">메시지</label>
+                <textarea id="message" name="message" class="form-control" placeholder="메시지를 입력하세요!" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">전송하기</button>
+            </form>
+            </div>
+
+            </div>
+        </div>
+    </section>
+    <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script type="text/javascript">
+      (function(){
+        emailjs.init("RyMHPA1RdN6HBBX0k"); 
+      })();
+    </script>
+
+    <script>
+      document.getElementById('contact-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        emailjs.sendForm(
+          'service_c29thug',     
+          'template_qhggvaa',  
+          this
+        ).then(
+          function(response) {
+            alert('메일 전송 성공!');
+            console.log('SUCCESS!', response.status, response.text);
+          },
+          function(error) {
+            alert('메일 전송 실패 😢');
+            console.log('FAILED...', error);
+          }
+        );
+      });
+    </script>
+
+    <!-- 푸터 -->
+    <footer>
+        <div class="container">
+            <a href="#" class="footer-logo">KYOUNGMIN SON</a>
+            <div class="footer-links">
+                <a href="#about">소개</a>
+                <a href="#projects">프로젝트</a>
+                <a href="#contact">연락처</a>
+            </div>
+            <div class="footer-socials">
+                <a href="https://github.com/SONKM"><i class="fab fa-github"></i></a>
+                <a href="https://www.instagram.com/kmin.s17/"><i class="fab fa-instagram"></i></a>
+            </div>
+            <p class="copyright">&copy; 2025 KyoungMin Son. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- 자바스크립트 -->
+    <script>
+        // DOM 요소 선택
+        const navbar = document.querySelector('.navbar');
+        const navbarLinks = document.querySelector('.navbar-links');
+        const menuToggle = document.getElementById('menu-toggle');
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = themeToggle.querySelector('i');
+        const projectCards = document.querySelectorAll('.project-card');
+        const modal = document.getElementById('project-modal');
+        const modalClose = document.getElementById('modal-close');
+        const contactForm = document.getElementById('contact-form');
+        
+        // 스크롤 시 내비게이션 바 스타일 변경
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
+                navbar.style.padding = '10px 0';
+            } else {
+                navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+                navbar.style.padding = '15px 0';
+            }
+        });
+        
+        // 모바일 메뉴 토글
+        menuToggle.addEventListener('click', () => {
+            navbarLinks.classList.toggle('active');
+        });
+        
+        // 다크 모드 토글
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            if (document.body.classList.contains('dark-mode')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+        
+        // 로컬 스토리지에서 테마 설정 불러오기
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            }
+        });
+        
+        // 프로젝트 모달 관련 함수
+        const projectData = [
+            {
+                id: 1,
+                title: '약용식물 개화기 예측 플랫폼',
+                image: 'Images/herbway.jpg',
+                description: `
+                    <p>식물의 위치 정보와 약용식물의 데이터를 결합하여 건강 관리에 도움이 되는 정보를 제공하는 웹 기반 플랫폼입니다. 현대 사회에서 고혈압, 비만, 당뇨 등 성인병 예방에 대한 관심이 증가하면서 자연에서 얻을 수 있는 약용식물 효능이 주목받고 있지만, 신뢰할 수 있는 정보와 실제 구매·채집 정보는 부족한 상황입니다. 이를 해결하기 위해 식물의 효능부터 복용법, 부작용까지 상세하게 제공하며, 사용자가 자신의 증상이나 관심 키워드를 입력하면 맞춤형 약용식물 추천 기능도 포함하고 있습니다.</p>
+                    <p> 특히 위치 기반 서비스를 통해 약초의 자생지 및 채집 위치 정보를 실시간으로 제공하고, 기상 데이터와 연계해 최적의 채집 시기를 예측하는 기능도 구현했습니다. 이를 통해 일반 사용자뿐만 아니라 연구자들이 현장에서 식물 채집을 보다 체계적이고 효율적으로 수행할 수 있게 되었습니다.</p>
+                    <p>본 프로젝트는 한림대학교 Plant Systematics 연구실과 협력하여, 실제 학술 데이터를 제공받아 진행되었으며, 학문적 기반과 실용성을 동시에 갖춘 것이 강점입니다.</p>
+                `,
+                tech: ['Spring JPA', 'HTML', 'CSS', 'MySQL', 'Python'],
+                gallery: [
+                    'Images/herbway2.jpg',
+                    'Images/herbway3.jpg',
+                    'Images/herbway4.jpg',
+                    'Images/herbway5.jpg'
+                ]
+            },
+
+             {
+                id: 2,
+                title: '유소년 선수 발굴 플랫폼',
+                image: 'Images/NextPro.jpg',
+                description: `
+                    <p>이 프로젝트는 유소년 축구선수들이 자신의 역량을 효과적으로 홍보할 수 있도록 돕는 플랫폼으로, 본인의 경기 영상과 플레이 데이터를 활용해 쉽게 포트폴리오를 제작할 수 있는 기능을 제공합니다. 영상 미디어의 발전으로 인해 누구나 손쉽게 경기 영상을 제작할 수 있지만, 이를 체계적으로 구단에 전달할 수 있는 창구는 부족한 현실을 반영해 기획되었습니다.</p>
+                    <p> 구단은 이 웹을 통해 손쉽게 유망한 유소년 선수들을 검색하고 비교할 수 있으며, 관심 있는 선수에게 직접 연락할 수 있는 기능도 포함하고 있습니다. 이 시스템은 유소년 스포츠 시장의 성장을 촉진할 수 있는 역할을 목표로 하고 있습니다.</p>
+                `,
+                tech: ['Spring JPA', 'HTML', 'CSS', 'JS'],
+                gallery: [
+                    'Images/Nextpro5.jpg',
+                    'Images/Nextpro2.jpg',
+                    'Images/Nextpro3.jpg',
+                    'Images/Nextpro4.jpg'
+                ]
+            },
+
+             {
+                id: 3,
+                title: '학교 블로그 배포',
+                image: 'Images/blog.jpg',
+                description: `
+                    <p>이 프로젝트는 학교 커뮤니티 활성화를 위해 개발 및 배포한 블로그형 웹 플랫폼으로, 학생과 교직원들이 학교 소식과 게시글을 자유롭게 공유할 수 있도록 제작되었습니다. Node.js 기반의 블로그를 AWS 환경에서 직접 배포하고 운영까지 진행했으며, 일정 기간 동안 실제 사용자들이 이용하도록 오픈하여 실사용 데이터와 피드백을 확보했습니다.</p>
+                    <p> 저의 주요 역할은 AWS 클라우드 인프라 구축과 운영 관리로, EC2, RDS, S3, Lambda, IAM, VPC 등 다양한 AWS 서비스를 직접 설정히고 연동했습니다. 이를 통해 유저 계정 관리, 댓글 시스템, 게시글 CRUD 기능이 포함된 서비스를 구축했으며, 실시간 트래픽을 처리할 수 있도록 했습니다.</p>
+                    <p>이 프로젝트는 클라우드 배포를 경험할 수 있었던 사례입니다.</p>
+                `,
+                tech: ['Node.js', 'MySQL', 'AWS EC2', 'AWS RDS','AWS S3','AWS Lambda','AWS IAM','AWS VPC'],
+                gallery: [
+                    'Images/blog4.jpg',
+                    'Images/blog2.jpg',
+                    'Images/blog3.jpg',
+                    'Images/blog5.jpg'
+                ]
+
+                
+            },
+
+             {
+                id: 4,
+                title: 'Heal&Fit: 시각장애인을 위한 AI 맞춤형 영양 관리 앱',
+                image: 'Images/healfit.jpg',
+                description: `
+                    <p>이 프로젝트는 시각장애인을 위한 개인 맞춤 영양 정보 제공 앱으로, 사용자가 섭취하는 음식의 사진을 분석하고 영양 정보를 음성으로 안내해주는 모바일 플랫폼입니다. 공공 데이터베이스와 AI 기술을 결합해 보다 정확한 영양 정보와 맞춤형 피드백을 제공하며, 특히 시각장애인 등 접근성이 필요한 사용자들에게도 쉽게 활용될 수 있도록 설계되었습니다.</p>
+                    <p>저의 주요 역할은 Flutter 기반의 핵심 기능 구현으로, 음식 인식 및 영양 추적 기능, 온보딩 프로세스 등을 구축했으며 공공 데이터를 통합해 정확한 식품 정보를 제공하도록 설계했습니다. 또한 **음성 기반 사용자 인터페이스(UI)**를 개발하여 시각장애 사용자가 음성 명령으로 앱을 조작하고 결과를 청취할 수 있도록 Speech-to-Text 및 Text-to-Speech 기능을 완성했습니다. 이미지 캡처, API 연동 등 코어 서비스와 상태 관리 로직을 직접 구현하며 사용성과 접근성을 동시에 향상시킨 것이 핵심 성과입니다.</p>
+                `,
+                tech: ['Flutter','Dart','Provider','Nutrition API','Speech-to-Text'],
+                gallery: [
+             ]
+
+                
+            },
+
+             {
+                id: 5,
+                title: '주식 예측 프로그램',
+                image: 'Images/stock.jpg',
+                description: `
+                    <p>Python과 금융 데이터 API를 활용해 실시간 주가 데이터를 수집하고, 시계열 패턴을 기반으로 종가 흐름을 시각화 및 예측합니다. 프로젝트에서는 FinanceDataReader를 통해 데이터를 자동 수집하고, Pandas와 NumPy로 전처리한 뒤 이동평균 기반의 간단한 예측 알고리즘을 적용했습니다. Matplotlib을 통해 사용자가 예측된 종가를 시각적으로 확인할 수 있도록 하였으며, 예측 정확도를 높이기 위한 기준선 설정 및 보간 처리를 추가 구현하였습니다.</p>
+                    <p>이 프로젝트는 향후 LSTM 등 고도화된 시계열 딥러닝 모델로 확장 가능성을 염두에 두고 구조화하였습니다.</p>
+                `,
+                tech: ['Python','Pandas','NumPy','FinanceDataReader','Matplotlib'],
+                gallery: [
+                    'Images/stock1.jpg',
+                    'Images/stock2.jpg',
+                    'Images/stock4.jpg',
+                    'Images/stock3.jpg'
+                ]
+
+                
+            },
+
+        ];
+        
+        
+        // 프로젝트 카드 클릭 이벤트
+        projectCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const projectId = parseInt(card.getAttribute('data-id'));
+                const project = projectData.find(p => p.id === projectId) || {
+                    title: card.querySelector('.project-title').textContent,
+                    description: `<p>${card.querySelector('.project-description').textContent}</p><p>이 프로젝트에 대한 자세한 정보는 곧 업데이트될 예정입니다.</p>`,
+                    tech: Array.from(card.querySelectorAll('.project-tech span')).map(span => span.textContent)
+                };
+                
+                openModal(project);
+            });
+        });
+        
+        // 모달 열기 함수
+        function openModal(project) {
+            const modalTitle = modal.querySelector('.modal-title');
+            const modalDescription = modal.querySelector('.modal-description');
+            const modalTechList = modal.querySelector('.modal-tech-list');
+            const modalImage = modal.querySelector('.modal-header img');
+            
+            modalTitle.textContent = project.title;
+            modalDescription.innerHTML = project.description;
+            
+            modalTechList.innerHTML = '';
+            project.tech.forEach(tech => {
+                const span = document.createElement('span');
+                span.textContent = tech;
+                modalTechList.appendChild(span);
+            });
+            
+            if (project.image) {
+                modalImage.src = project.image;
+            }
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+
+            const modalGallery = modal.querySelector('.gallery-grid');
+            modalGallery.innerHTML = '';
+            if (project.gallery) {
+                project.gallery.forEach(imageSrc => {
+                    const galleryItem = document.createElement('div');
+                    galleryItem.classList.add('gallery-item');
+                    const img = document.createElement('img');
+                    img.src = imageSrc;
+                    img.alt = `${project.title} 스크린샷`;
+                    galleryItem.appendChild(img);
+                    modalGallery.appendChild(galleryItem);
+                });
+              
+}
+        }
+        
+        // 모달 닫기 이벤트
+        modalClose.addEventListener('click', () => {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+        
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+        
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            
+            console.log({ name, email, subject, message });
+        
+            alert('메시지가 성공적으로 전송되었습니다.');
+            contactForm.reset();
+        });
+        
+        // 스크롤 애니메이션
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                    
+                    if (navbarLinks.classList.contains('active')) {
+                        navbarLinks.classList.remove('active');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
